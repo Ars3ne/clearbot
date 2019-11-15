@@ -18,6 +18,7 @@ Para executar o ClearBot, você precisará ter as seguintes dependências:
 * ``kogama.py``
 * ``requests``
 * ``beautifulsoup4``
+* ``lxml``
 
 Depois de instalar o Python, para instalar as outras dependências, basta instalar o ``kogama.py``, usando o comando abaixo:
 ```
