@@ -1,6 +1,6 @@
 '''
 /*
- * ClearBot - Versão 1.0
+ * ClearBot - Versão 1.1.1
  * Desenvolvido por: Ars3ne
 */
 '''
@@ -33,6 +33,7 @@ blocked_keywords = ['ouro', 'f1', 'f5', 'espaços', '.­', 'profile', 'avatar', 
 # Realizando o login...
 print("[ClearBot] Iniciando bot...")
 k = Kogama.Kogama(server) # Caso queira usar no servidor WWW, mude para "www". Se quiser no friends, mude para "friends".
+
 l = k.Auth().login(username, password) # Tente fazer o login.
 
 if not l: exit('[ClearBot] Não foi possível fazer login.') # Se não deu para logar, fale que não deu para logar.
@@ -45,11 +46,11 @@ bot_id = info['data']['id'] # Se deu para logar, pegue o ID do bot.
 
 # Funções
 def getGames(): # Obtém os mapas que o bot é membro.
-  r = k.session.get('https://br-lb3.kgoma.com/game/')
+  r = k.session.get('{}/game/'.format(server))
   return json.loads(r.text)
 
 def getGameComments(gameId): # Obtém os últimos comentários de um mapa
-  r = k.session.get('https://br-lb3.kgoma.com/game/{}/comment?page=1?count={}'.format(gameId, check_comments))
+  r = k.session.get('{}/game/{}/comment?page=1?count={}'.format(server, gameId, check_comments))
   return json.loads(r.text)
 
 def getGameInfo(gameId):
@@ -67,7 +68,7 @@ def getGameInfo(gameId):
 #Funções de adicionar amigos
 
 def getFriends(): # Obtem os amigos
-  f = k.session.get("https://br-lb3.kgoma.com/profile/{}/friends".format(bot_id))
+  f = k.session.get("{}/profile/{}/friends".format(server, bot_id))
   html = f.content
   soup = BeautifulSoup(html, 'lxml')
   data = soup.find_all("script")[8].string
@@ -93,7 +94,7 @@ def removeFriends(): # Remove todos os amigos.
 
 #Funções para aceitar projetos
 def getGameInvites(): # Obtem os convites
-  g = k.session.get("https://br-lb3.kgoma.com/user/{}/invitations".format(bot_id))
+  g = k.session.get("{}/user/{}/invitations".format(server, bot_id))
   return json.loads(g.text)
 
 def acceptGameInvites(): # Aceita os convites
@@ -189,8 +190,11 @@ def ClearBot(): # E, finalmente, a função do bot.
         continue
 
       if game['id'] == debug_map_id: # Se o mapa for o mapa de testes, então fale que não achou nada de errado no comentário.
-        k.Game().add_comment(game['id'], "Eu não consegui achar nada de errado no seu comentário.")
-        debug_comments.append(comment['id'])
+        if comment_json['data'] == "Eu não consegui achar nada de errado no seu comentário.": # Mas, antes, verifique se o usuário não está tentando fazer um bug na matrix.
+          k.Game().add_comment(game['id'], "Mas eu consegui.")
+        else:
+          k.Game().add_comment(game['id'], "Eu não consegui achar nada de errado no seu comentário.")
+        debug_comments.append(comment['id']) # Em qualquer caso, adicione os comentários a lista de debug.
         continue
 
 # E, para finalizar, chame as funções.
