@@ -147,15 +147,12 @@ def ClearBot(): # E, finalmente, a função do bot.
       if not comment['profile_id'] in author_comments: # Se o autor do comentário não estiver na lista, então o adicione.
         author_comments[comment['profile_id']] = []
         author_comments[comment['profile_id']].append(comment['id'])
-        print("{}: {}".format(comment['profile_id'], len(author_comments[comment['profile_id']]))) 
 
       if old_comment in author_comments[comment['profile_id']]: # Se o comentário antigo for do usuário, coloque ele na lista.
         author_comments[comment['profile_id']].append(comment['id']) 
-        print("{}: {}".format(comment['profile_id'], len(author_comments[comment['profile_id']]))) 
 
       else: # Se não, delete a lista.
         author_comments[comment['profile_id']] = []
-        print("lista deletada. ({})".format(comment['profile_id']))
 
       if len(author_comments[comment['profile_id']]) > comments_limit-1: # Se o usuário postou mais comentários do que o permitido, então delete todos.
         old_comment = comment['id']
