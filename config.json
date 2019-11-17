@@ -1,0 +1,13 @@
+{
+    // Configurações de Autenticação
+    "server": "br", // Coloque aqui o seu serivdor.
+    "username": "username", // Coloque aqui o seu usuário. 
+    "password": "password", // Coloque aqui a sua senha.
+    // Configurações do ClearBot
+    "check_comments": 10, // Quantos comentários o ClearBot deve verificar por mapa. O padrão é 10, porém é recomendado que você coloque um valor mais alto.
+    "acceptable_emotes": 10, // O limite de emotes que um comentário pode ter. Se ele tiver mais do que esse limite, o comentário é deletado. Padrão: 10 
+    "comments_limit": 5, // O limite de comentários que um usuário pode mandar em seguida. Se ele passar do limite, todos os comentários serão deletados. Padrão: 5
+    "auto_add": false, // Não recomendado se estiver executando o ClearBot na sua conta. Aceita todos os pedidos de amizade automaticamente, e depois os deleta em 5 minutos. Padrão: false
+    "auto_join": false, // Não recomendado se estiver executando o ClearBot na sua conta. Aceite todos os convites para projetos automaticamente. Padrão: False
+    "debug_map": 0 // Não é recomendado mexer. Coloque aqui o ID de um mapa para ser o mapa de debug. Padrão: 0
+}

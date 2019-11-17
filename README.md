@@ -10,44 +10,53 @@ O ``ClearBot`` é um robô que detecta e remove spam dos comentários dos mapas 
 
 
 # Instalação:
-Para instalar a última versão do ClearBot, basta clicar [aqui](https://github.com/ars3ne/clearbot/releases/latest).
+Para instalar a última versão do ClearBot, basta clicar [aqui](https://github.com/ars3ne/clearbot/releases/latest) e seguir os próximos passos.
 
 ### Dependências:
-Para executar o ClearBot, você precisará ter as seguintes dependências:
-* Python na versão 3.5.3 ou maior
-* ``kogama.py``
-* ``requests``
-* ``beautifulsoup4``
-* ``lxml``
+Para executar o ClearBot, você precisará instalar os seguintes itens:
+* Python 3.5.3 ou superior (Para baixar-lo, clique [aqui](https://www.python.org/downloads/).)
+* ``kogama.py`` (Veja abaixo)
+* ``requests`` (Veja abaixo)
+* ``beautifulsoup4`` (Veja abaixo)
+* ``lxml`` (Veja abaixo)
 
-Depois de instalar o Python, para instalar as outras dependências, basta instalar o ``kogama.py``, usando o comando abaixo:
+Depois de instalar o Python, para instalar as outras dependências, basta instalar o ``kogama.py``. Para instalar-lo, abra um Prompt de Comando ou Terminal e execute o comando abaixo:
 ```
 pip install kogama.py
 ```
 
-As outras dependências devem ser baixadas automáticamente depois de baixar o ``kogama.py``
+As outras dependências devem ser baixadas automáticamente após baixar o ``kogama.py``.
 
 ### Configurações
 ------
-Depois de instalar o ClearBot, abra o arquivo ``ClearBot.py``. Já nas primeiras linhas terá algumas configurações que você não precisa mudar, mas recomendamos que você de uma olhada nelas.
+Depois de baixar o ClearBot e as suas dependências, abra o arquivo ``config.json``. Lá terá várias configurações. A maioria você não precisará mexer, porém eu recomendo que de uma lida em todas.
 
-```python
-# Configurações:
-check_comments = 30 # A quantidade de comentários que o bot verificará. Se você estiver executando o bot na sua conta, é recomendado que coloque um valor alto.
-auto_add = False # Não recomendado se estiver executando o bot na sua conta e não funciona com a versão pública do Kogama.py. Se estiver como 'True', o bot aceitará todos os pedidos de amizade, e depois deletará todos os amigos depois de um tempo.
-auto_join = False # Não recomendado se estiver executando o bot na sua conta. Se estiver como 'True', o bot aceitará todos os convites de projetos automaticamente.
-acceptable_emotes = 10 # Coloque aqui o número máximo de emojis que uma mensagem pode ter.
-debug_map_id = 0 # Não funciona corretamente com a versão pública do Kogama.py. Aqui fica um ID de um mapa que você queira que sirva como debug. Muito provavelmente você não quer isso, então deixe 0.
+```javascript
+{
+    // Configurações de Autenticação
+    "server": "br", // Coloque aqui o seu serivdor.
+    "username": "username", // Coloque aqui o seu usuário. 
+    "password": "password", // Coloque aqui a sua senha.
+    // Configurações do ClearBot
+    "check_comments": 10, // Quantos comentários o ClearBot deve verificar por mapa. O padrão é 10, porém é recomendado que você coloque um valor mais alto.
+    "acceptable_emotes": 10, // O limite de emotes que um comentário pode ter. Se ele tiver mais do que esse limite, o comentário é deletado. Padrão: 10 
+    "comments_limit": 5, // O limite de comentários que um usuário pode mandar em seguida. Se ele passar do limite, todos os comentários serão deletados. Padrão: 5
+    "auto_add": false, // Não recomendado se estiver executando o ClearBot na sua conta. Aceita todos os pedidos de amizade automaticamente, e depois os deleta em 5 minutos. Padrão: false
+    "auto_join": false, // Não recomendado se estiver executando o ClearBot na sua conta. Aceite todos os convites para projetos automaticamente. Padrão: False
+    "debug_map": 0 // Não é recomendado mexer. Coloque aqui o ID de um mapa para ser o mapa de debug. Padrão: 0
+}
 ```
-
-Para finalizar, depois de mudar ou não as configurações, você verá o seguinte trecho:
-```python
-# Realizando o login...
-print("[ClearBot] Iniciando bot...")
-k = Kogama.Kogama("br") # Caso queira usar no servidor WWW, mude para "www". Se quiser no friends, mude para "friends".
-l = k.Auth().login('username', 'password') # Tente fazer o login.
+Porém, existem três configurações que você precisa mudar. Elas são as três primeiras:
+```javascript
+{
+    // Configurações de Autenticação
+    "server": "br", // Coloque aqui o seu serivdor.
+    "username": "username", // Coloque aqui o seu usuário. 
+    "password": "password", // Coloque aqui a sua senha.
+    ....
+}
 ```
-Você terá que mudar a última linha, trocando a palavra ``username`` pelo usuário e a palavra ``password`` pela senha da conta que você quer executar o robô, sem remover ás aspas.
+Você trocará a palavra ``username`` pelo seu usuário e a palavra ``password`` pela a sua senha. Caso queira executar o robô em outro servidor, você terá que trocar a palavra ``br`` por ``www`` ou ``friends``.
 
 E pronto! Todas as configurações já foram feitas. Para executar o ClearBot, basta abrir o terminal e executar o seguinte comando:
 
